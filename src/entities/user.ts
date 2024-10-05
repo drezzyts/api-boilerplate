@@ -17,4 +17,8 @@ export class User {
     public static from(props: UserProps) {
         return new User(props);
     } 
+
+    public get id() { return this.props.id }
+    public get name() { return this.props.name }
+    public get email() { return this.props.email }
 }
