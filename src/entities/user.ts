@@ -6,8 +6,16 @@ export interface UserProps {
     email: string
 }
 
-export class User { 
-    private constructor(private props: UserProps) {}
+export class User implements UserProps { 
+    public readonly id: UUID;
+    public name: string;
+    public email: string;
+
+    private constructor(props: Readonly<UserProps>) {
+        this.id = props.id;
+        this.name = props.name;
+        this.email = props.email;
+    }
 
     public static create(name: string, email: string) {
         const id = randomUUID();
@@ -17,8 +25,4 @@ export class User {
     public static from(props: UserProps) {
         return new User(props);
     } 
-
-    public get id() { return this.props.id }
-    public get name() { return this.props.name }
-    public get email() { return this.props.email }
 }
