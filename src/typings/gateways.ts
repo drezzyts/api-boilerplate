@@ -3,7 +3,7 @@ import type { User } from "../entities/user"
 
 export interface BaseGateway<T> {
     get(id: UUID): Promise<T>
-    save(data: unknown): Promise<void>,
+    save(data: T): Promise<void>,
     list(): Promise<T[]>
 };
 
