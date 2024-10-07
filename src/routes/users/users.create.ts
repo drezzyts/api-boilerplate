@@ -1,19 +1,13 @@
-import { User, type UserProps } from "../../entities/user";
 import { UserGateway } from "../../typings/gateways";
 import { Route, RouteHttpMethod } from "../../typings/routes";
-import { createUserUseCase } from "../../use-cases/user.create";
-
-interface CreateUserBody {
-    name: string,
-    email: string
-}
+import { CreateUserInput, createUserUseCase } from "../../use-cases/user.create";
 
 export default function (repository: UserGateway) {
     return {
         method: RouteHttpMethod.POST,
         path: "/users",
         handler: async (request, reply) => {
-            const { name, email } = request.body as CreateUserBody;
+            const { name, email } = request.body as CreateUserInput;
 
             if (!name || !email ) return reply.code(400).send({
                 error: "Missing required fields: 'email' or 'name'"
