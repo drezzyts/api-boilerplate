@@ -16,8 +16,6 @@ export async function registerEntityRoutes<T>(path: string, repository: BaseGate
     const files = await glob(`src/routes/${path}/**.ts`);
     const routes: Route[] = [];
 
-    console.log(files);
-
     for (const file of files) {
         const { default: register }: { default: RouteRegister<T> } = await import(`../../${file}`);
         const route = register(repository);
